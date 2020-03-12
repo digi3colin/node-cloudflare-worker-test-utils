@@ -1,0 +1,35 @@
+{
+  "name": "@komino/cloudflare-worker-test-utils",
+  "version": "0.0.2",
+  "description": "Polyfill the cloudflare worker API for local testing",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/digi3colin/node-cloudflare-worker-test-utils.git"
+  },
+  "keywords": [
+    "cloudflare",
+    "nodejs",
+    "node",
+    "local",
+    "development",
+    "polyfill",
+    "worker"
+  ],
+  "author": "Colin Leung",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/digi3colin/node-cloudflare-worker-test-utils/issues"
+  },
+  "homepage": "https://github.com/digi3colin/node-cloudflare-worker-test-utils#readme",
+  "dependencies": {
+    "atob": "^2.1.2",
+    "btoa": "^1.2.1",
+    "node-fetch": "^2.6.0",
+    "node-webcrypto-ossl": "^1.0.48",
+    "url": "^0.11.0"
+  }
+}
