@@ -32,23 +32,25 @@ function chomp(str) {
 }
 
 const buildRequest = (url, opts={}) => {
-  const { country = "DEV", ip = "127.0.0.1", ray = "0000000000000000", ...requestOpts } = opts;
-  const request = new Request(url, { redirect: "manual", ...requestOpts });
-  const headers = request.headers;
-  const parsedURL = new URL(request.url);
-
+  const parsedURL = new URL(url);
+  const headers = new Headers();
   // CF Specific Headers
-  headers.set("CF-Ray", ray);
+  headers.set("CF-Ray", "0000000000000000");
   headers.set("CF-Visitor", JSON.stringify({ scheme: chomp(parsedURL.protocol) }));
-  headers.set("CF-IPCountry", country);
-  headers.set("CF-Connecting-IP", ip);
-  headers.set("X-Real-IP", ip);
-
-  // General Proxy Headers
-  headers.append("X-Forwarded-For", ip);
+  headers.set("CF-IPCountry", "DEV");
+  headers.set("CF-Connecting-IP", "127.0.0.1");
+  headers.set("X-Real-IP", "127.0.0.1");
+  headers.append("X-Forwarded-For", "127.0.0.1");
   headers.append("X-Forwarded-Proto", chomp(parsedURL.protocol));
 
-  return new Request(request, { headers });
+  Object.keys(opts.headers).forEach(key => headers.set(key, opts.headers[key]));
+
+  const result = new Request(url, {headers: headers, opts});
+  const props = Object.assign({}, opts);
+  delete props.headers;
+  delete props.body;
+  delete props.method;
+  return Object.assign(result, props);
 };
 
 module.exports = {
