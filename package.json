@@ -1,6 +1,6 @@
 {
   "name": "@komino/cloudflare-worker-test-utils",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "Polyfill the cloudflare worker API for local testing",
   "main": "index.js",
   "scripts": {

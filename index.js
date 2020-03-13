@@ -45,11 +45,12 @@ const buildRequest = (url, opts={}) => {
 
   Object.keys(opts.headers).forEach(key => headers.set(key, opts.headers[key]));
 
-  const result = new Request(url, {headers: headers, opts});
+  const result = new Request(url, {...opts, headers: headers});
   const props = Object.assign({}, opts);
   delete props.headers;
   delete props.body;
   delete props.method;
+
   return Object.assign(result, props);
 };
 
